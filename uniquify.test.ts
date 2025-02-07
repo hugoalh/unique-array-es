@@ -1,9 +1,13 @@
 import { assertEquals } from "STD/assert/equals";
-import { uniqueArray } from "./uniquify.ts";
-Deno.test("0 Elements", { permissions: "none" }, () => {
+import {
+	uniqueArray,
+	uniqueIterate,
+	uniqueIterateSync
+} from "./uniquify.ts";
+Deno.test("Array 0/0", { permissions: "none" }, () => {
 	assertEquals(uniqueArray([]), []);
 });
-Deno.test("2 Elements 1 Uniques 1", { permissions: "none" }, () => {
+Deno.test("Array 1/2 1", { permissions: "none" }, () => {
 	assertEquals(uniqueArray([
 		{ type: { id: "_ETGENUS" } },
 		{ type: { id: "_ETGENUS" } }
@@ -11,7 +15,7 @@ Deno.test("2 Elements 1 Uniques 1", { permissions: "none" }, () => {
 		{ type: { id: "_ETGENUS" } }
 	]);
 });
-Deno.test("2 Elements 1 Uniques 2", { permissions: "none" }, () => {
+Deno.test("Array 1/2 2", { permissions: "none" }, () => {
 	assertEquals(uniqueArray([
 		new Set([1, 2, 3]),
 		new Set([1, 2, 3])
@@ -19,7 +23,7 @@ Deno.test("2 Elements 1 Uniques 2", { permissions: "none" }, () => {
 		new Set([1, 2, 3])
 	]);
 });
-Deno.test("2 Elements 2 Uniques 1", { permissions: "none" }, () => {
+Deno.test("Array 2/2", { permissions: "none" }, () => {
 	assertEquals(uniqueArray([
 		{
 			id: "_1p7ZED73OF98VbT1SzSkjn",
@@ -48,16 +52,7 @@ Deno.test("2 Elements 2 Uniques 1", { permissions: "none" }, () => {
 		}
 	]);
 });
-Deno.test("2 Elements 2 Uniques 2", { permissions: "none" }, () => {
-	assertEquals(uniqueArray([
-		new Set([1, 2, 3]),
-		new Set([1, 2])
-	]), [
-		new Set([1, 2, 3]),
-		new Set([1, 2])
-	]);
-});
-Deno.test("3 Elements 2 Uniques", { permissions: "none" }, () => {
+Deno.test("Array 2/3 1", { permissions: "none" }, () => {
 	assertEquals(uniqueArray([
 		{ foo: "bar" },
 		{ foo: "bar" },
@@ -67,9 +62,22 @@ Deno.test("3 Elements 2 Uniques", { permissions: "none" }, () => {
 		{ bar: "gaz" }
 	]);
 });
-Deno.test("6 Elements 1 Uniques", { permissions: "none" }, () => {
+Deno.test("Array 2/3 2", { permissions: "none" }, () => {
+	assertEquals(uniqueArray([
+		new Set([1, 2, 3]),
+		new Set([1, 2]),
+		new Set([1, 2])
+	]), [
+		new Set([1, 2, 3]),
+		new Set([1, 2])
+	]);
+});
+Deno.test("Array 1/6", { permissions: "none" }, () => {
 	assertEquals(uniqueArray([{}, {}, {}, {}, {}, {}]), [{}]);
 });
-Deno.test("6 Elements 6 Uniques", { permissions: "none" }, () => {
+Deno.test("Array 6/6", { permissions: "none" }, () => {
 	assertEquals(uniqueArray([1, 2n, "3", false, true, null]), [1, 2n, "3", false, true, null]);
+});
+Deno.test("Iterate 5/10", { permissions: "none" }, async () => {
+	assertEquals(await Array.fromAsync(uniqueIterate([1, 2, 3], new Set([1, 2, 3, 4]).values(), uniqueIterateSync([1, 4, 5]))), [1, 2, 3, 4, 5]);
 });

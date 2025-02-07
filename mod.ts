@@ -1,8 +1,7 @@
 export { isArrayUnique } from "./assert.ts";
 export {
-	/**
-	 * @deprecated This default import is deprecated, use named import with `uniqueArray` instead.
-	 */
 	default,
-	uniqueArray
+	uniqueArray,
+	uniqueIterate,
+	uniqueIterateSync
 } from "./uniquify.ts";

@@ -1,22 +1,58 @@
-import { deepStrictEqual } from "node:assert";
-/**
- * Determine whether the items are deep strict equal.
- * @param {unknown} a
- * @param {unknown} b
- * @returns {boolean} Determine result.
- */
-function isEqual(a: unknown, b: unknown): boolean {
-	try {
-		deepStrictEqual(a, b);
+import { notDeepStrictEqual } from "node:assert";
+class Uniquify<T> {
+	#storage: Set<T> = new Set<T>();
+	for(value: T): boolean {
+		if (this.#storage.size > 0) {
+			for (const element of this.#storage.values()) {
+				try {
+					notDeepStrictEqual(element, value);
+				} catch {
+					return false;
+				}
+			}
+		}
+		this.#storage.add(value);
 		return true;
-	} catch {
-		return false;
 	}
 }
 /**
- * Return unique array elements without any duplicated elements by ignore their reference points.
+ * Return unique iterate elements without any duplicated elements, asynchronously.
  * @template {unknown} T
- * @param {readonly (readonly T[])[]} items Arrays that need to have unique elements.
+ * @param {...readonly (readonly T[] | AsyncIterable<T> | AsyncIterableIterator<T> | AsyncIterator<T> | Iterable<T> | IterableIterator<T> | Iterator<T>)} items Iterates that need to have unique elements.
+ * @returns {AsyncGenerator<T>} An iterate with unique elements.
+ */
+export async function* uniqueIterate<T>(...items: readonly (readonly T[] | AsyncIterable<T> | AsyncIterableIterator<T> | AsyncIterator<T> | Iterable<T> | IterableIterator<T> | Iterator<T>)[]): AsyncGenerator<T> {
+	const uniquify: Uniquify<T> = new Uniquify<T>();
+	for (const item of items) {
+		//@ts-ignore Mix iterators.
+		for await (const itemElement of item) {
+			if (uniquify.for(itemElement)) {
+				yield itemElement;
+			}
+		}
+	}
+}
+/**
+ * Return unique iterate elements without any duplicated elements, synchronously.
+ * @template {unknown} T
+ * @param {...readonly (readonly T[] | Iterable<T> | IterableIterator<T> | Iterator<T>)} items Iterates that need to have unique elements.
+ * @returns {Generator<T>} An iterate with unique elements.
+ */
+export function* uniqueIterateSync<T>(...items: readonly (readonly T[] | Iterable<T> | IterableIterator<T> | Iterator<T>)[]): Generator<T> {
+	const uniquify: Uniquify<T> = new Uniquify<T>();
+	for (const item of items) {
+		//@ts-ignore Mix iterators.
+		for (const itemElement of item) {
+			if (uniquify.for(itemElement)) {
+				yield itemElement;
+			}
+		}
+	}
+}
+/**
+ * Return unique array elements without any duplicated elements.
+ * @template {unknown} T
+ * @param {...readonly (readonly T[])} items Arrays that need to have unique elements.
  * @returns {T[]} An array with unique elements.
  * @example
  * ```ts
@@ -25,17 +61,6 @@ function isEqual(a: unknown, b: unknown): boolean {
  * ```
  */
 export function uniqueArray<T>(...items: readonly (readonly T[])[]): T[] {
-	const result: T[] = [];
-	for (const itemElement of new Set<T>(items.flat()).values()) {
-		if (
-			result.length === 0 ||
-			!result.some((resultElement: T): boolean => {
-				return isEqual(itemElement, resultElement);
-			})
-		) {
-			result.push(itemElement);
-		}
-	}
-	return result;
+	return Array.from(uniqueIterateSync(...items));
 }
 export default uniqueArray;
