@@ -7,7 +7,7 @@
 [![JSR: @hugoalh/unique-array](https://img.shields.io/jsr/v/@hugoalh/unique-array?label=@hugoalh/unique-array&labelColor=F7DF1E&logo=jsr&logoColor=000000&style=flat "JSR: @hugoalh/unique-array")](https://jsr.io/@hugoalh/unique-array)
 [![NPM: @hugoalh/unique-array](https://img.shields.io/npm/v/@hugoalh/unique-array?label=@hugoalh/unique-array&labelColor=CB3837&logo=npm&logoColor=ffffff&style=flat "NPM: @hugoalh/unique-array")](https://www.npmjs.com/package/@hugoalh/unique-array)
 
-An ES (JavaScript & TypeScript) module to return unique array elements without any duplicated elements by ignore their reference points.
+An ECMAScript (JavaScript & TypeScript) module to return unique array elements without any duplicated elements by ignore their reference points.
 
 ## 🔰 Begin
 

@@ -1,14 +1,14 @@
-import { assertEquals } from "STD/assert/equals";
+import { deepStrictEqual } from "node:assert";
 import {
 	uniqueArray,
 	uniqueIterate,
 	uniqueIterateSync
 } from "./uniquify.ts";
 Deno.test("Array 0/0", { permissions: "none" }, () => {
-	assertEquals(uniqueArray([]), []);
+	deepStrictEqual(uniqueArray([]), []);
 });
 Deno.test("Array 1/2 1", { permissions: "none" }, () => {
-	assertEquals(uniqueArray([
+	deepStrictEqual(uniqueArray([
 		{ type: { id: "_ETGENUS" } },
 		{ type: { id: "_ETGENUS" } }
 	]), [
@@ -16,7 +16,7 @@ Deno.test("Array 1/2 1", { permissions: "none" }, () => {
 	]);
 });
 Deno.test("Array 1/2 2", { permissions: "none" }, () => {
-	assertEquals(uniqueArray([
+	deepStrictEqual(uniqueArray([
 		new Set([1, 2, 3]),
 		new Set([1, 2, 3])
 	]), [
@@ -24,7 +24,7 @@ Deno.test("Array 1/2 2", { permissions: "none" }, () => {
 	]);
 });
 Deno.test("Array 2/2", { permissions: "none" }, () => {
-	assertEquals(uniqueArray([
+	deepStrictEqual(uniqueArray([
 		{
 			id: "_1p7ZED73OF98VbT1SzSkjn",
 			type: { id: "_ETGENUS" },
@@ -53,7 +53,7 @@ Deno.test("Array 2/2", { permissions: "none" }, () => {
 	]);
 });
 Deno.test("Array 2/3 1", { permissions: "none" }, () => {
-	assertEquals(uniqueArray([
+	deepStrictEqual(uniqueArray([
 		{ foo: "bar" },
 		{ foo: "bar" },
 		{ bar: "gaz" }
@@ -63,7 +63,7 @@ Deno.test("Array 2/3 1", { permissions: "none" }, () => {
 	]);
 });
 Deno.test("Array 2/3 2", { permissions: "none" }, () => {
-	assertEquals(uniqueArray([
+	deepStrictEqual(uniqueArray([
 		new Set([1, 2, 3]),
 		new Set([1, 2]),
 		new Set([1, 2])
@@ -73,11 +73,11 @@ Deno.test("Array 2/3 2", { permissions: "none" }, () => {
 	]);
 });
 Deno.test("Array 1/6", { permissions: "none" }, () => {
-	assertEquals(uniqueArray([{}, {}, {}, {}, {}, {}]), [{}]);
+	deepStrictEqual(uniqueArray([{}, {}, {}, {}, {}, {}]), [{}]);
 });
 Deno.test("Array 6/6", { permissions: "none" }, () => {
-	assertEquals(uniqueArray([1, 2n, "3", false, true, null]), [1, 2n, "3", false, true, null]);
+	deepStrictEqual(uniqueArray([1, 2n, "3", false, true, null]), [1, 2n, "3", false, true, null]);
 });
 Deno.test("Iterate 5/10", { permissions: "none" }, async () => {
-	assertEquals(await Array.fromAsync(uniqueIterate([1, 2, 3], new Set([1, 2, 3, 4]).values(), uniqueIterateSync([1, 4, 5]))), [1, 2, 3, 4, 5]);
+	deepStrictEqual(await Array.fromAsync(uniqueIterate([1, 2, 3], new Set([1, 2, 3, 4]).values(), uniqueIterateSync([1, 4, 5]))), [1, 2, 3, 4, 5]);
 });
