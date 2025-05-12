@@ -1,4 +1,4 @@
-import { uniqueArray } from "./mod.ts";
+import { uniqueArray } from "./uniquify.ts";
 /**
  * Determine whether the array is contain unique elements.
  * @param {readonly unknown[]} item Item that need to determine.
