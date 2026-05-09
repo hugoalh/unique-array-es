@@ -4,8 +4,8 @@
 
 🔗
 [GitHub](https://github.com/hugoalh/unique-array-es)
-[JSR](https://jsr.io/@hugoalh/unique-array)
-[NPM](https://www.npmjs.com/package/@hugoalh/unique-array)
+● [JSR](https://jsr.io/@hugoalh/unique-array)
+● [NPM](https://www.npmjs.com/package/@hugoalh/unique-array)
 
 An ECMAScript module to return unique array elements without any duplicated elements by ignore their reference points.
 
