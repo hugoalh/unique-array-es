@@ -1,6 +1,7 @@
 import { notDeepStrictEqual } from "node:assert";
 /**
  * Collect unique elements into the collector.
+ * @template {unknown} T
  */
 export class UniqueCollector<T> {
 	get [Symbol.toStringTag](): string {
@@ -13,14 +14,14 @@ export class UniqueCollector<T> {
 	}
 	/**
 	 * Collect the element into the collector.
-	 * @param {T} o Element that need to collect.
+	 * @param {T} item Element that need to collect.
 	 * @returns {boolean} Whether the element is collected (i.e.: element is unique).
 	 */
-	collect(o: T): boolean {
+	collect(item: T): boolean {
 		this.#count += 1n;
-		const isExist: boolean = this.has(o);
+		const isExist: boolean = this.has(item);
 		if (!isExist) {
-			this.#bin.add(o);
+			this.#bin.add(item);
 		}
 		return !isExist;
 	}
@@ -40,16 +41,16 @@ export class UniqueCollector<T> {
 	}
 	/**
 	 * Check whether the collector has the element.
-	 * @param {T} o Element that need to check.
+	 * @param {T} item Element that need to check.
 	 * @returns {boolean} Determine result.
 	 */
-	has(o: T): boolean {
+	has(item: T): boolean {
 		for (const value of this.values()) {
-			if (value === o) {
+			if (value === item) {
 				return true;
 			}
 			try {
-				notDeepStrictEqual(value, o);
+				notDeepStrictEqual(value, item);
 			} catch {
 				return true;
 			}
