@@ -3,7 +3,8 @@
 [**⚖️** MIT](./LICENSE.md)
 
 🔗
-[GitHub](https://github.com/hugoalh/unique-array-es)
+[DistBoard @hugoalh](https://hugoalh.github.io/distboard/unique_array_ecmascript)
+● [GitHub](https://github.com/hugoalh/unique-array-es)
 ● [JSR](https://jsr.io/@hugoalh/unique-array)
 ● [NPM](https://www.npmjs.com/package/@hugoalh/unique-array)
 

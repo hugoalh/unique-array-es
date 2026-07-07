@@ -7,6 +7,7 @@ authors:
   - name: "HUGOALH"
     alias: "hugoalh"
 repository-code: "https://github.com/hugoalh/unique-array-es"
+abstract: "An ECMAScript module to return unique array elements without any duplicated elements by ignore their reference points."
 keywords:
   - "array"
   - "ecmascript"
