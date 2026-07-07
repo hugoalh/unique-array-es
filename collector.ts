@@ -19,11 +19,11 @@ export class UniqueCollector<T> {
 	 */
 	collect(item: T): boolean {
 		this.#count += 1n;
-		const isExist: boolean = this.has(item);
-		if (!isExist) {
+		const isUnique: boolean = !this.has(item);
+		if (isUnique) {
 			this.#bin.add(item);
 		}
-		return !isExist;
+		return isUnique;
 	}
 	/**
 	 * Get the number of collects in the collector.

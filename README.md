@@ -40,6 +40,8 @@ This does not request any runtime permission.
 | **Name** | **Path** | **Description** |
 |:--|:--|:--|
 | `.` | `./mod.ts` | Default. |
+| `./array` | `./array.ts` | Utility for array. |
+| `./collector` | `./collector.ts` | Collector. |
 
 > [!NOTE]
 > - Different runtimes have vary support for the sources and entrypoints, visit the runtime documentation for more information.
@@ -52,7 +54,16 @@ This does not request any runtime permission.
 ## 🧩 APIs
 
 - ```ts
-  function uniqueArray<T>(...items: readonly (readonly T[])[]): T[];
+  class UniqueCollector<T> {
+    collect(item: T): boolean;
+    getCount(): bigint;
+    getSize(): number;
+    has(item: T): boolean;
+    values(): SetIterator<T>;
+  }
+  ```
+- ```ts
+  function uniqueArray<T>(item: readonly T[]): T[];
   ```
 
 > [!NOTE]

@@ -1,5 +1,5 @@
 import { deepStrictEqual } from "node:assert";
-import { uniqueArray } from "./mod.ts";
+import { uniqueArray } from "./array.ts";
 Deno.test("0/0", { permissions: "none" }, () => {
 	deepStrictEqual(uniqueArray([]), []);
 });
