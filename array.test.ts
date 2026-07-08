@@ -1,6 +1,6 @@
 import { deepStrictEqual } from "node:assert";
 import { uniqueArray } from "./array.ts";
-Deno.test("0/0", { permissions: "none" }, () => {
+Deno.test("0/0 1", { permissions: "none" }, () => {
 	deepStrictEqual(uniqueArray([]), []);
 });
 Deno.test("1/2 1", { permissions: "none" }, () => {
@@ -19,7 +19,7 @@ Deno.test("1/2 2", { permissions: "none" }, () => {
 		new Set([1, 2, 3])
 	]);
 });
-Deno.test("2/2", { permissions: "none" }, () => {
+Deno.test("2/2 1", { permissions: "none" }, () => {
 	deepStrictEqual(uniqueArray([
 		{
 			id: "_1p7ZED73OF98VbT1SzSkjn",
@@ -68,9 +68,9 @@ Deno.test("2/3 2", { permissions: "none" }, () => {
 		new Set([1, 2])
 	]);
 });
-Deno.test("1/6", { permissions: "none" }, () => {
+Deno.test("1/6 1", { permissions: "none" }, () => {
 	deepStrictEqual(uniqueArray([{}, {}, {}, {}, {}, {}]), [{}]);
 });
-Deno.test("6/6", { permissions: "none" }, () => {
+Deno.test("6/6 1", { permissions: "none" }, () => {
 	deepStrictEqual(uniqueArray([1, 2n, "3", false, true, null]), [1, 2n, "3", false, true, null]);
 });
