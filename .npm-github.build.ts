@@ -37,5 +37,15 @@ await transform({
 		}
 	},
 	outputDirectory: "dist/npm-github",
-	outputDirectoryPreEmpty: true
+	outputDirectoryPreEmpty: true,
+	shims: {
+		blob: false,
+		crypto: false,
+		deno: false,
+		prompts: false,
+		timers: false,
+		undici: false,
+		weakRef: false,
+		webSocket: false
+	}
 });
